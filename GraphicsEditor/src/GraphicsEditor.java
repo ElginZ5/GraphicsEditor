@@ -19,6 +19,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -30,7 +31,9 @@ public class GraphicsEditor {
 	
 	public int xLoc, yLoc;
 	
-	public int shapeMode = 0; // rect = 1; circle = 2
+	public int mode = 0; // rect = 1; circle = 2; delete = 3
+	
+	public boolean ifDelete = false;
 	
 	ArrayList<Shape> Shapes = new ArrayList<Shape>();
 	
@@ -49,13 +52,14 @@ public class GraphicsEditor {
 		
 		JButton rectangle = new JButton("Rectangle");
 		JButton circle = new JButton("Circle");
+		JButton delete = new JButton("Delete");
 		
 		rectangle.addActionListener(new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				shapeMode = 1;
+				mode = 1;
 				
 			}
 			
@@ -66,7 +70,18 @@ public class GraphicsEditor {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				shapeMode = 2;
+				mode = 2;
+				
+			}
+			
+		});
+		
+		delete.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				mode = 3;
 				
 			}
 			
@@ -77,6 +92,7 @@ public class GraphicsEditor {
 		innerPanel.setBackground(Color.CYAN);
 		innerPanel.add(circle);
 		innerPanel.add(rectangle);
+		innerPanel.add(delete);
 		
 		panel.add(innerPanel);
 		
@@ -91,6 +107,8 @@ public class GraphicsEditor {
 					
 				}
 				
+			
+				
 			}
 			
 		};
@@ -103,19 +121,34 @@ public class GraphicsEditor {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 
-				if (shapeMode == 1) {
+				if (mode == 1) {
 					
 					xLoc = e.getX();
 					yLoc = e.getY();
 					Shapes.add(new Rectangle(xLoc, yLoc, 200, 100, Color.BLUE));
 					frame.getContentPane().repaint();
 					
-				} else if (shapeMode == 2) {
+				} else if (mode == 2) {
 					
 					xLoc = e.getX();
 					yLoc = e.getY();
 					Shapes.add(new Circle(xLoc, yLoc, 100, 100, Color.BLUE));
 					frame.getContentPane().repaint();
+					
+				} else if (mode == 3) {
+					
+					for (int i = 0; i < Shapes.size(); i++) {
+					
+						if (Shapes.get(i).isOn(e.getX(), e.getY())) {
+						
+							xLoc = e.getX();
+							yLoc = e.getY();
+						
+							Shapes.remove(i);
+							frame.getContentPane().repaint();
+						
+						}
+					}
 					
 				}
 				
@@ -145,6 +178,25 @@ public class GraphicsEditor {
 				
 			}
 				
+			
+		});
+		
+		drawPanel.addMouseMotionListener(new MouseMotionListener() {
+
+			@Override
+			public void mouseDragged(MouseEvent e) {
+
+				
+				
+			}
+
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			
 			
 		});
 		

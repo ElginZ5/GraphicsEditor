@@ -25,7 +25,23 @@ public class Rectangle extends Shape {
 	@Override
 	public boolean isOn(int x, int y) {
 		// TODO Auto-generated method stub
-		return false;
+		
+		int centerX = (this.x+(width/2));
+		int centerY = (this.y+(height/2));
+				
+		int d1 = (int)(Math.sqrt(Math.pow((centerX-this.x), 2) + Math.pow((centerY-this.y), 2)));
+		int d2 = (int)(Math.sqrt(Math.pow((centerX-x), 2) + Math.pow((centerY-y), 2)));
+		
+		if (d2 <= d1) {
+			
+			return true;
+			
+		} else {
+			
+			return false;
+		
+		}
+	
 	}
 
 	@Override
