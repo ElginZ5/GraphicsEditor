@@ -17,6 +17,8 @@ public class Rectangle extends Shape {
 	@Override
 	public void draw(Graphics g) {
 
+		//draws the rectangle
+		
 		g.setColor(c);
 		g.fillRect(x, y, width, height);
 		
@@ -26,27 +28,50 @@ public class Rectangle extends Shape {
 	public boolean isOn(int x, int y) {
 		// TODO Auto-generated method stub
 		
-		int centerX = (this.x+(width/2));
-		int centerY = (this.y+(height/2));
-				
-		int d1 = (int)(Math.sqrt(Math.pow((centerX-this.x), 2) + Math.pow((centerY-this.y), 2)));
-		int d2 = (int)(Math.sqrt(Math.pow((centerX-x), 2) + Math.pow((centerY-y), 2)));
+		// checks if the user is clicking on the rectangle by checking if the user is clicking between the top
+		// left and right points in the rectangle
 		
-		if (d2 <= d1) {
+		if (x < (this.x+width) && x > (this.x) && y < (this.y+height) && y > (this.y)) {
 			
 			return true;
 			
 		} else {
 			
 			return false;
-		
+			
 		}
 	
 	}
 
 	@Override
 	public void reSize(int x1, int y1, int x2, int y2) {
-		// TODO Auto-generated method stub
+		
+		// changes the size of the rectangle depending on  where the user drags
+
+		if (x1 <= x2) {
+			
+			x = x1;
+			width = x2-x1;
+			
+		} else if (x1 > x2) {
+			
+			x = x2;
+			width = x1-x2;
+			
+		}
+		
+		if (y1 <= y2) {
+			
+			y = y1;
+			height = y2-y1;
+			
+		} else if (y1 > y2) {
+			
+			y = y2;
+			height = y1-y2;
+			
+		}
+		
 		
 	}
 
