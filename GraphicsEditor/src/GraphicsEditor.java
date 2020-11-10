@@ -175,9 +175,10 @@ public class GraphicsEditor {
 				for (int i = 0; i < Shapes.size(); i++) {
 					
 					Shapes.remove(i);
-					frame.getContentPane().repaint();
 					
 				}
+				
+				frame.getContentPane().repaint();
 				
 			}
 			
@@ -259,23 +260,9 @@ public class GraphicsEditor {
 
 			@Override
 			public void mouseClicked(MouseEvent e) {
-
-				// if the user clicks on the rectangle button a rectangle is drawn
-				if (mode == 1) {
-					
-					xLoc = e.getX(); // the location of were the user clicked
-					yLoc = e.getY();
-					Shapes.add(new Rectangle(0, 0, 0, 0, c));
-					
-				// same thing for the circle
-				} else if (mode == 2) {
-					
-					xLoc = e.getX();
-					yLoc = e.getY();
-					Shapes.add(new Circle(0, 0, 0, 0, c));
 					
 				// if the user clicks the delete button and if the user actually clicked a shape, it gets removed
-				} else if (mode == 3) {
+				if (mode == 3) {
 					
 					for (int i = 0; i < Shapes.size(); i++) {
 					
@@ -289,13 +276,6 @@ public class GraphicsEditor {
 						
 						}
 					}
-				
-				// if user clicks line, a line is drawn
-				} else if (mode == 4) {
-					
-					xLoc = e.getX();
-					yLoc = e.getY();
-					Shapes.add(new Line(0, 0, 0, 0, c));
 					
 				// if the user clicks the copy button all of the shapes that have been drawn
 				// are saved into an array for later use
@@ -313,7 +293,6 @@ public class GraphicsEditor {
 					for (int i = 0; i < copiedShapes.size(); i++) {
 						
 						Shapes.add(copiedShapes.get(i));
-						frame.getContentPane().repaint();
 						
 					}
 					
@@ -355,6 +334,28 @@ public class GraphicsEditor {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
+				// if the user clicks on the rectangle button a rectangle is drawn
+				if (mode == 1) {
+					
+					xLoc = e.getX(); // the location of were the user clicked
+					yLoc = e.getY();
+					Shapes.add(new Rectangle(0, 0, 0, 0, c));
+					
+				// same thing for the circle
+				} else if (mode == 2) {
+					
+					xLoc = e.getX();
+					yLoc = e.getY();
+					Shapes.add(new Circle(0, 0, 0, 0, c));
+					
+				// if user clicks line, a line is drawn
+				} else if (mode == 4) {
+						
+						xLoc = e.getX();
+						yLoc = e.getY();
+						Shapes.add(new Line(0, 0, 0, 0, c));
+						
+				}
 				
 			}
 
